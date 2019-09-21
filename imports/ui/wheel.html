@@ -1,0 +1,17 @@
+<template name="wheel">
+	{{> wheelHeader}}
+			<div class="wheel--winner"><span style="display: table-cell; vertical-align: middle;"></span></div>
+
+	<div class="container col-lg-5 text-center" style="margin-top:80px">
+		{{#if students}}
+  		<div class="wheelWrapper">
+			<canvas id="wheel" width="800"   height="800"></canvas>
+			<div id="spinButton"><span>{{_ 'wheel--click-to-spin'}}</span></div>
+			<div id="indicator"></div>
+		</div>
+		{{else}}
+		<a href="{{pathFor route='wheelSettings' _id=wheelId}}" class="btn btn-primary"><i class="fa fa-plus"></i>{{_ 'wheel--add-students'}}</a>
+		{{/if}}
+	</div>
+</template>
+

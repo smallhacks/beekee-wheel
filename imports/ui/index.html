@@ -1,0 +1,54 @@
+<template name="index">
+	{{> indexHeader}}
+	<div class="container">
+  		<div class="row justify-content-center mt-5">
+  			<div class="col-sm-12 col-lg-8 text-center">
+  				<h1>Beekee Wheel</h1>
+				<p>A simple random picker wheel</p>
+				{{#if currentUser}}
+					<h5 class="mb-3 mt-5">{{_ 'index-teacher--spaces-title'}}</h5>
+					{{#if ownWheels.count}}
+						<div class="list-group">
+							{{#each ownWheels}}
+							  	<a href="{{pathFor route='wheel' _id=this._id}}" class="list-group-item list-group-item-action d-flex"><span>{{name}}</span></a>
+							{{/each}}
+						</div>
+					{{else}}
+						<p class="text-center">{{_ 'index-teacher--no-space'}}</p>
+					{{/if}}
+				{{else}}
+					<img src="/img/example_wheel.png" style="width:200px"/>
+				{{/if}}
+			</div>
+		</div>	
+		<div class="row justify-content-center mt-5 bt-5 text-center">
+  			<div class="col-12 col-lg-8 text-center">
+  				{{#if currentUser}}
+					<button class="btn btn-primary" data-toggle="modal" data-target="#spaceSubmit"><i class="fa fa-plus"></i> {{_ 'index-teacher--button-submit-space'}}</button>
+				{{else}}
+						<a href="{{pathFor 'login'}}" class="btn btn-primary">
+							<i class="fa fa-plus"></i> 
+							<span> {{_ 'index-teacher--button-submit-space'}}</span>
+						</a>
+				{{/if}}
+		<div class="row justify-content-center mt-5">
+			<div class="col-5 col-lg-2 text-center">
+				<select id="langSelect" class="custom-select custom-select-sm border-0" style="width:auto; background-color: #fafafa;">
+				  <option value="en" {{langIsSelected 'en'}}>English</option>
+				  <option value="fr-FR" {{langIsSelected 'fr-FR'}}>Français</option>
+				</select>
+			</div>
+  		</div>
+		<div class="row justify-content-center text-center" style="margin-top:50px">
+				<div class="col-lg-8">
+				<p>{{_ 'index-student--create-your-space-1'}} <a href="https://live.beekee.ch" class="">{{_ 'index-student--create-your-space-2'}}</a>{{_ 'index-student--create-your-space-3'}}</p></div>
+	  		</div>
+			</div>
+
+		</div>
+				<div class="text-center mt-3" style="color:#e0e0e0;">
+			<p><a href="https://www.beekee.ch" class="link-white" style="font-weight:normal;text-decoration: none;">{{_ 'index-student--about-us'}}</a></p>
+		</div>
+	</div>
+	{{> wheelSubmit}}
+</template>

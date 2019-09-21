@@ -1,0 +1,18 @@
+<template name="wheelSettings">
+	{{> backHeader}}
+	<div class="container h-100 text-center">
+		<div class="row justify-content-center min-h-100">
+    		<div class="col-sm-12 col-lg-8 min-h-100 pt-4 pl-4 pr-4 pb-4">
+                <h3 class="mb-4 text-center">{{_ 'space-edit--page-title'}}</h3>
+                <h4>{{_ 'wheel-settings--students-list'}}</h4>
+                <div class="list-group w-100 text-left">
+                    {{#each students}}
+                      <li class="list-group-item">{{name}}<a href="#" class="float-right ml-3 small settings--delete-student text-danger">{{_ 'admin--users-delete'}}</a><a href="#" class="float-right ml-3 small settings--edit-student">{{_ 'admin--users-edit'}}</a>
+                    </li>
+                    {{/each}}
+                </div>
+                <button class="btn btn-primary settings--add-student mt-4"><i class="fa fa-plus"></i> {{_ 'wheel-settings--add-student'}}</button>
+    		</div>
+  		</div>
+	</div>
+</template>
