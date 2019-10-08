@@ -25,13 +25,16 @@ html {
 body {
 	background-color: #fafafa;
 	font-family: Raleway, 'Raleway Regular', sans-serif;
-	overflow-y: hidden;
 	overflow-x:hidden;
 	height: 100% !important;
 }
 
 .wheelWrapper {
 	position: relative;
+}
+
+#wheel-wrapper {
+	overflow-y: hidden;
 }
 
 #wheel {

@@ -47,11 +47,12 @@ Template.wheel.onRendered(function () {
 	timeOut = null;
 	wheelStopped = true;
 
-	Session.set("wheelId",this.data.wheelId);
+	var wheelId = this.data.wheelId;
+	Session.set("wheelId",wheelId);
 
 
-		// Deps.autorun(function() {
-	init(Session.get("wheelId"));
+//		 Deps.autorun(function() {
+	init(wheelId);
 // });
 
 	//Class.insert({name:"506"});
@@ -77,6 +78,8 @@ Template.wheel.onRendered(function () {
 
 function init(wheelId) {
 
+	console.log("on init - 1");
+
 	// Get students list
 	//students = JSON.parse(localStorage.getItem("students"));
 
@@ -85,6 +88,7 @@ function init(wheelId) {
  students = Students.find({wheelId:wheelId}).map(function (doc) {
   return doc.name;
 });
+	console.log("on init - 1aa");
 
 
  if (students.length > 0) {
@@ -102,13 +106,17 @@ function init(wheelId) {
 	// Set default degree (360*5) + clicks
 	degree = 1800;
 	clicks = 0;
+		console.log("on init - 1a");
 
 	drawWheel();
+		console.log("on init - 1b");
+
 }
 }
 
 
 function drawWheel() {
+	console.log("on init - 2");
 
 	var canvas = document.getElementById('wheel');
 	var context = canvas.getContext('2d');
@@ -121,6 +129,7 @@ function drawWheel() {
 	var startAngle = 0;
 	var endAngle = segmentWidth;
 	var segmentDepth = 244;
+	console.log("on init - 3");
 
 	//resizeCanvasToDisplaySize(canvas);
 

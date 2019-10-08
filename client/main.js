@@ -9,6 +9,7 @@ import '../imports/ui/wheelHeader.js';
 import '../imports/ui/register.js';
 import '../imports/ui/login.js';
 import '../imports/ui/index.js';
+import '../imports/ui/loading.html';
 import '../imports/ui/wheelSubmit.js';
 import '../imports/ui/userSettings.js';
 import '../imports/ui/wheelSettings.js';

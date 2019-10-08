@@ -1,7 +1,7 @@
 <template name="wheel">
+	<div id="wheel-wrapper">
 	{{> wheelHeader}}
-			<div class="wheel--winner"><span style="display: table-cell; vertical-align: middle;"></span></div>
-
+	<div class="wheel--winner"><span style="display: table-cell; vertical-align: middle;"></span></div>
 	<div class="container col-lg-5 text-center" style="margin-top:80px">
 		{{#if students}}
   		<div class="wheelWrapper">
@@ -13,5 +13,6 @@
 		<a href="{{pathFor route='wheelSettings' _id=wheelId}}" class="btn btn-primary"><i class="fa fa-plus"></i>{{_ 'wheel--add-students'}}</a>
 		{{/if}}
 	</div>
+</div>
 </template>
 
