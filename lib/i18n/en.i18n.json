@@ -258,6 +258,8 @@
 	"live-feed-delete-comment--title":"Delete comment",
 	"live-feed-delete-comment--subtitle":"Delete this comment?",
 	"wheel--click-to-spin":"Click to spin!",
+	"wheel--welcome-message-title":"Welcome to your new Wheel!",
+	"wheel--welcome-message-body":"Start by adding students.",
 	"wheel--add-students":"Add new students",
 	"wheel-settings--add-student":"Add a student",
 	"wheel-settings--students-list":"Students",

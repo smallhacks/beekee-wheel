@@ -35,6 +35,9 @@ Template.wheelSubmit.events({
 			else {
 				//Router.go('space', {_id: result._id});
 				$('#spaceSubmit').modal('hide');
+				$('#spaceSubmit').on('hidden.bs.modal', function () {
+    				Router.go('wheel', {_id: result._id});
+				});
 			}       
 		});
 

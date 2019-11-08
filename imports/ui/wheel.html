@@ -2,7 +2,7 @@
 	<div id="wheel-wrapper">
 	{{> wheelHeader}}
 	<div class="wheel--winner"><span style="display: table-cell; vertical-align: middle;"></span></div>
-	<div class="container col-lg-5 text-center" style="margin-top:80px">
+	<div class="container col-lg-7 col-xl-6 text-center" style="margin-top:80px">
 		{{#if students}}
   		<div class="wheelWrapper">
 			<canvas id="wheel" width="800"   height="800"></canvas>
@@ -10,7 +10,9 @@
 			<div id="indicator"></div>
 		</div>
 		{{else}}
-		<a href="{{pathFor route='wheelSettings' _id=wheelId}}" class="btn btn-primary"><i class="fa fa-plus"></i>{{_ 'wheel--add-students'}}</a>
+		<h4>{{_ 'wheel--welcome-message-title'}}</h4>
+		<p>{{_ 'wheel--welcome-message-body'}}</p>
+		<a href="{{pathFor route='wheelSettings' _id=wheelId}}" class="btn btn-primary"><i class="fa fa-plus"></i> {{_ 'wheel--add-students'}}</a>
 		{{/if}}
 	</div>
 </div>

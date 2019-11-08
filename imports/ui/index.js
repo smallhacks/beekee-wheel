@@ -13,6 +13,14 @@ Template.index.onCreated(function() {
 })
 
 
+Template.index.onRendered(function() {
+
+	$('.modal').on('shown.bs.modal', function (e) {
+		  $(this).find('[autofocus]').focus();
+	});
+});
+
+
 Template.index.helpers({
 
 	ownWheels: function() {
