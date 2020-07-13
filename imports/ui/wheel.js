@@ -5,7 +5,7 @@ import { Wheels } from '../api/wheels.js';
 import { Students } from '../api/students.js';
 
 import './wheel.html';
-import './wheelHeader.html';
+import './wheelHeader.js';
 
 
 Template.wheel.onCreated(function() {
@@ -25,6 +25,19 @@ Template.wheel.events({
 		e.preventDefault();
 		$('#spinButton').animate({width: "34%", left: "33.5%", height:"34%",top: "32.5%"}, 80).animate({width: "32%", left: "34.5%", height:"32%",top: "33.5%"}, 140);
 		spin();
+	},
+	'click .wheel--hide-student': function(e) {
+		e.preventDefault();
+
+		var studentId = $(e.currentTarget).data('studentid');
+		Students.update(studentId,{ $set: {hidden: true}});
+		init(this.wheelId);
+	},
+	'click .wheel--show-all': function(e) {
+		e.preventDefault();
+		Meteor.call('showAllStudents',{wheelId:this.wheelId}, function() {
+			init(this.wheelId);
+		});
 	}
 });
 
@@ -34,10 +47,18 @@ Template.wheel.helpers({
   	return this.wheelId
   },
   students() {
-  		var students = Students.find({wheelId: this.wheelId});
+  		var students = Students.find({wheelId: this.wheelId, hidden:false});
   	if (students.count() > 0)
-  		return Students.find({wheelId: this.wheelId});
+  		return Students.find({wheelId: this.wheelId, hidden:false});
   	else return null;
+  },
+    nbNotHiddenStudents() {
+  	 var nbNotHiddenStudents = Students.find({wheelId: this.wheelId, hidden:false}).count();
+  	 return nbNotHiddenStudents;
+  },
+  nbHiddenStudents() {
+  	 var nbHiddenStudents = Students.find({wheelId: this.wheelId, hidden:true}).count();
+  	 return nbHiddenStudents;
   }
 });
 
@@ -47,7 +68,7 @@ Template.wheel.onRendered(function () {
 	timeOut = null;
 	wheelStopped = true;
 
-	var wheelId = this.data.wheelId;
+	wheelId = this.data.wheelId;
 	Session.set("wheelId",wheelId);
 
 
@@ -83,11 +104,12 @@ function init(wheelId) {
 
 	//students = Students.find({classId:classId}).fetch();
 
- students = Students.find({wheelId:wheelId}).map(function (doc) {
+ studentsNames = Students.find({wheelId:wheelId, hidden:false}).map(function (doc) {
   return doc.name;
 });
 
- if (students.length > 0) {
+
+ if (studentsNames.length > 0) {
 
 	// Get colors
 	colors = ["7d58bf","a345b7","e73f78","ec5b51","f86c41","f8a126","f7c42b","f7e657","ceda55","97c561","63b668","27a498","25c0d4","27b0ee","41a1ef","5a66ba","7d58bf","a345b7","e73f78","ec5b51","f86c41","f8a126","f7c42b","f7e657","ceda55","97c561","63b668"];
@@ -95,8 +117,8 @@ function init(wheelId) {
 
 	// Divide the wheel by the number of students and store the students' angles
     studentsAngles = [];
-    for (var i = 0 ; i < students.length; i++) {
-      studentsAngles.unshift(i*(360)/students.length);
+    for (var i = 0 ; i < studentsNames.length; i++) {
+      studentsAngles.unshift(i*(360)/studentsNames.length);
     }
 
 	// Set default degree (360*5) + clicks
@@ -117,7 +139,7 @@ function drawWheel() {
 	var x = canvas.width / 2;
 	var y = canvas.height / 2;
 
-	var segmentWidth = 360 / students.length;
+	var segmentWidth = 360 / studentsNames.length;
 	var startAngle = 0;
 	var endAngle = segmentWidth;
 	var segmentDepth = 244;
@@ -145,7 +167,7 @@ function drawWheel() {
 	context.stroke();
 	context.restore();
 
-    for (var i = 0; i < students.length; i++){  
+    for (var i = 0; i < studentsNames.length; i++){  
 
     	// Draw segments
 	    context.beginPath();
@@ -171,7 +193,7 @@ function drawWheel() {
       	context.rotate((startAngle+(0.6*segmentWidth)) * Math.PI / 180);
       	context.fillStyle = 'white';
       	context.font= "25px Arial";
-      	context.fillText(students[i],150,0);
+      	context.fillText(studentsNames[i],150,0);
       	context.restore();
 
 		// Increase per segment        
@@ -250,7 +272,7 @@ function showWinner() {
 	}
 
     if (angle > studentsAngles[0]) {
-    	$( ".wheel--winner span" ).text(students[0]);
+    	$( ".wheel--winner span" ).text(studentsNames[0]);
     	    	$(".wheel--winner").css({"background-color":'#'+colors[0]});
 
     	    	$('.wheel--winner').click(function() {
@@ -261,12 +283,16 @@ function showWinner() {
     $( "#spinButton span" ).fadeIn(300);
 }, 5000);
 
+    // Add hide student button
+    var studentId = Students.findOne({wheelId: wheelId, hidden:false},{skip:0})._id;
+
+   	$( ".wheel--winner span" ).append('<br><button class="wheel--hide-student btn btn-secondary" data-studentid="'+studentId+'"><i class="fas fa-eye-slash"></i> '+TAPi18n.__('wheel--hide-student')+'</button>');
     }
 	else {
-		for (var j=1 ; j< students.length; j++) {
+		for (var j=1 ; j< studentsNames.length; j++) {
 			if (angle >= studentsAngles[j] && angle < studentsAngles[j-1]) {
 
-    	$( ".wheel--winner span" ).text(students[j]);
+    	$( ".wheel--winner span" ).text(studentsNames[j]);
     	$(".wheel--winner").css({"background-color":'#'+colors[j]});
     	$('.wheel--winner').click(function() {
     		$('.wheel--winner').hide();
@@ -276,9 +302,14 @@ function showWinner() {
     $( "#spinButton span" ).fadeIn(300);
 }, 5000);
 
+    var studentId = Students.findOne({wheelId: wheelId, hidden:false},{skip:j})._id;
+
+   		$( ".wheel--winner span" ).append('<br><button class="wheel--hide-student btn btn-secondary" data-studentid="'+studentId+'"><i class="fas fa-eye-slash"></i> '+TAPi18n.__('wheel--hide-student')+'</button>');
 			}
         }
+
     }
+
 wheelStopped = false;
 }
 

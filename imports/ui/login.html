@@ -8,14 +8,14 @@
 					<div class="card-body">
 						<form id="login--form" name="login--form">
 	 						<div class="form-group">
-	    						<input type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{_ 'login--mail'}}" autofocus>
+	    						<input type="text" name="email" class="login--input-username form-control" id="email" aria-describedby="emailHelp" placeholder="{{_ 'login--mail'}}" autofocus>
 	  						</div>
 	  						<div class="form-group">
 	  							<input type="password" name="password" class="form-control" id="password" value="" placeholder="{{_ 'login--password'}}">
 	  						</div>
 							{{#if errorMessage}}
 								<div class="alert alert-danger" role="alert">
-									{{t9n errorMessage}}
+									{{errorMessage}}
 								</div>
 									{{#if passwordRecovery}}
 										<br><a href="#" class="login--send-mail-forgot-password">{{_ 'login--send-mail-forgot-password-link'}}</a>
@@ -30,11 +30,7 @@
   		<div class="row justify-content-center mt-5 text-center">
   			<div class="col-12 col-lg-6 text-center">
   				<h6>{{_ 'login--register'}}</h6>
-  				{{#if isBox}}
-					{{_ 'login--register-contact-admin'}}
-				{{else}}
-					<a href="{{pathFor 'register'}}"> {{_ 'login--register-link'}}</a>
-				{{/if}}		
+					{{_ 'login--register-contact-admin'}}	
 			</div>
 		</div>
 	</div>

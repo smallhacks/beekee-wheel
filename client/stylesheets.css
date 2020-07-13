@@ -14,8 +14,8 @@
 }
 
 @font-face {
-	font-family: "Raleway Regular";
-	src: url('./fonts/Montserrat-Regular.otf');
+	font-family: "Raleway Light";
+	src: url('./fonts/Raleway-Light.ttf');
 }
 
 html {
@@ -24,7 +24,7 @@ html {
 
 body {
 	background-color: #fafafa;
-	font-family: Raleway, 'Raleway Regular', sans-serif;
+	font-family: Raleway, 'Raleway Light', sans-serif;
 	overflow-x:hidden;
 	height: 100% !important;
 }

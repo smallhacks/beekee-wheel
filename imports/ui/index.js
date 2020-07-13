@@ -15,6 +15,28 @@ Template.index.onCreated(function() {
 
 Template.index.onRendered(function() {
 
+	// if (Cookie.get('token')) {
+	// 	console.log("on a un cookie : "+Cookie.get('token'));
+	// 	Meteor.loginWithToken(Cookie.get('token'), function(err) {
+ //  					if (!err) {  						  					
+ //  						console.log("c'est bon !");
+
+ //  						  					Router.go('index'); 
+ //  						  					//Cookie.set('token', result.token);
+
+
+ //  					} else {
+ //  						  						console.log(err);
+
+ //  					}
+
+
+ //  					});
+	// }
+
+
+
+
 	$('.modal').on('shown.bs.modal', function (e) {
 		  $(this).find('[autofocus]').focus();
 	});

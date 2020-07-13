@@ -2,17 +2,29 @@
 	{{> backHeader}}
 	<div class="container h-100 text-center">
 		<div class="row justify-content-center min-h-100">
-    		<div class="col-sm-12 col-lg-8 min-h-100 pt-4 pl-4 pr-4 pb-4">
-                <h3 class="mb-4 text-center">{{_ 'space-edit--page-title'}}</h3>
-                <h4>{{_ 'wheel-settings--students-list'}} <span class="small text-secondary">({{students.count}})</span></h4>
-                <div class="list-group w-100 text-left">
-                    {{#each students}}
-                      <li class="list-group-item">{{name}}<a href="#" class="float-right ml-3 small settings--delete-student text-danger">{{_ 'admin--users-delete'}}</a><a href="#" class="float-right ml-3 small settings--edit-student">{{_ 'admin--users-edit'}}</a>
-                    </li>
-                    {{/each}}
-                </div>
-                <button class="btn btn-primary settings--add-student mt-4"><i class="fa fa-plus"></i> {{_ 'wheel-settings--add-student'}}</button>
-    		</div>
-  		</div>
-	</div>
+          <div class="col-sm-12 col-lg-8 min-h-100 pt-4 pl-4 pr-4 pb-4">
+            <h3 class="mb-4 text-center">{{_ 'space-edit--page-title'}}</h3>
+            <h4>{{_ 'wheel-settings--students-list'}} <span class="small text-secondary">({{students.count}})</span></h4>
+            <div class="list-group w-100 text-left">
+                {{#each students}}
+                    <li class="list-group-item" style="background-color:#e8e8e8;">
+                        {{name}}
+                        {{#if studentHidden}}<a href="#" class="wheel-settings--show-student float-right ml-3 text-secondary"><i class="fas fa-eye-slash"></i></a>{{else}}<a href="#" class="wheel-settings--hide-student float-right ml-3"><i class="fas fa-eye"></i></a>{{/if}}<a href="#" class="float-right ml-3 small settings--delete-student text-danger">{{_ 'admin--users-delete'}}</a><a href="#" class="float-right ml-3 small settings--edit-student">{{_ 'admin--users-edit'}}</a>
+                </li>
+                {{/each}}
+            </div>
+            <button type="button" class="wheel-settings--show-all float-right btn btn-primary btn-sm mt-2 ml-2"><i class="fas fa-eye"></i> {{_ 'wheel-settings--show-all'}}</button>
+            <button type="button" class="wheel-settings--hide-all float-right btn btn-secondary btn-sm mt-2"><i class="fas fa-eye-slash"></i> {{_ 'wheel-settings--hide-all'}}</button>
+        </div>
+        <div class="col-sm-12 col-lg-8 text-center">
+            <button class="btn btn-primary settings--add-student mt-4 mb-3"><i class="fa fa-plus"></i> {{_ 'wheel-settings--add-student'}}</button>
+        </div>
+    </div>
+            <div class="row justify-content-center min-h-100">
+            <div class="col-sm-12 col-lg-8 min-h-100 pt-4 pl-4 pr-4 pb-4">
+                <h4>General</h4>
+                <button class="btn btn-danger wheel-settings--delete-wheel mt-4 mb-3">Delete this wheel</button>
+            </div>
+        </div>
+</div>
 </template>

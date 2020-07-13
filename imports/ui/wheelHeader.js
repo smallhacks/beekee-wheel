@@ -13,8 +13,7 @@ Template.wheelHeader.helpers({
   		return Wheels.findOne({_id:Session.get("wheelId")}).name;
   },
   wheelId() {
-  	if (typeof Wheels.findOne({_id:Session.get("wheelId")}) != "undefined")
-  		return Wheels.findOne({_id:Session.get("wheelId")})._id;
+    return Session.get("wheelId");
   },
   adminName: function() {
   		if (Meteor.user()) 

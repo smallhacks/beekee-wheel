@@ -1,7 +1,8 @@
 <template name="wheel">
 	<div id="wheel-wrapper">
 	{{> wheelHeader}}
-	<div class="wheel--winner"><span style="display: table-cell; vertical-align: middle;"></span></div>
+	<div class="wheel--winner"><span style="display: table-cell; vertical-align: middle;"></span>
+</div>
 	<div class="container col-lg-7 col-xl-6 text-center" style="margin-top:80px">
 		{{#if students}}
   		<div class="wheelWrapper">
@@ -15,6 +16,9 @@
 		<a href="{{pathFor route='wheelSettings' _id=wheelId}}" class="btn btn-primary"><i class="fa fa-plus"></i> {{_ 'wheel--add-students'}}</a>
 		{{/if}}
 	</div>
+		<div class="container col-lg-7 col-xl-6 text-center mb-3" style="margin-top:20px">
+			<span style="font-size:1.3em;" class="font-weight-bold">{{nbNotHiddenStudents}}</span><span style="font-size:1.3em;"> {{_ 'wheel--students'}} </span>{{#if nbHiddenStudents}}<br><span class="text-secondary">+ </span><span class="text-secondary font-weight-bold">{{nbHiddenStudents}}</span><span class="text-secondary"> {{_ 'wheel--hidden'}} </span><span>(</span><a style="font-size:1em;" class="wheel--show-all" href="#">{{_ 'wheel--show'}}</a><span>)</span>{{/if}}
+		</div>
+
 </div>
 </template>
-

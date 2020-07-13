@@ -1,6 +1,6 @@
 import { Mongo } from 'meteor/mongo';
  
-export const Wheels = new Mongo.Collection('wheels');
+export const Wheels = new Mongo.Collection('wheel-wheels');
 
 
 
@@ -19,6 +19,10 @@ Wheels.allow({
 
 
 if(Meteor.isServer) {
+
+	Meteor.publish('ownWheels', function(userId) {
+		return Wheels.find({userId:userId});
+	});
 
 	Meteor.methods({
 		wheelInsert: function(wheelAttributes) {
